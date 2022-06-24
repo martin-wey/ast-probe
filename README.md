@@ -1,5 +1,5 @@
 
-# AST-Probe -- Codebase and data
+# AST-Probe - Codebase and data
 **Paper.** AST-Probe: Recovering abstract syntax trees from hidden representations of pre-trained language models
 **Link.** https://arxiv.org/abs/2206.11719
 
@@ -54,13 +54,13 @@ The script `dataset_generator.py` with the argument `--download` will download t
 2. Train the AST-Probe.
 ```sh
 python src/main.py \
-	--do_train \
-	--run_name <folder_run_name> \
-	--pretrained_model_name_or_path <hugging_face_model> \
-	--model_type <model_type> 
-	--lang <lang> \
-	--layer <layer> \
-	--rank <rank>
+  --do_train \
+  --run_name <folder_run_name> \
+  --pretrained_model_name_or_path <hugging_face_model> \
+  --model_type <model_type> 
+  --lang <lang> \
+  --layer <layer> \
+  --rank <rank>
 ```
 The script `main.py` is in charge of training the probe. The main arguments are the following:
 *  `--do_train`: if you want to train a probe classifier.
@@ -80,13 +80,13 @@ As a result of this script, a folder `runs/folder_run_name` will be generated. T
 Here is an example of the usage of this script:
 ```sh
 python src/main.py \
-	--do_train \
-	--run_name codebert_python_5_128 \
-	--pretrained_model_name_or_path microsoft/codebert-base \
-	--model_type roberta \
-	--lang python \ 
-	--layer 5 \
-	--rank 128
+  --do_train \
+  --run_name codebert_python_5_128 \
+  --pretrained_model_name_or_path microsoft/codebert-base \
+  --model_type roberta \
+  --lang python \ 
+  --layer 5 \
+  --rank 128
 ```
 This command trains a 128-dimensional probe over the output embeddings of the 5th layer of CodeBERT using the Python dataset. After running this command, the folder `runs/codebert_python_5_128` is created.
 
