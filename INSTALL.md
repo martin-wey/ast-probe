@@ -27,7 +27,7 @@ git clone https://github.com/tree-sitter/tree-sitter-java.git
 cd ..
 python src/data/build_grammars.py
 ```
-4. [Optional] You may have to add the project directory to your Python path.
+4. Add the project directory to your Python path.
 ```sh
 export PYTHONPATH="${PYTHONPATH}:~/ast-probe/"
 ```
