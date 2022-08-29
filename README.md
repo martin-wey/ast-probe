@@ -57,7 +57,7 @@ python src/main.py \
   --do_train \
   --run_name <folder_run_name> \
   --pretrained_model_name_or_path <hugging_face_model> \
-  --model_type <model_type> 
+  --model_type <model_type> \
   --lang <lang> \
   --layer <layer> \
   --rank <rank>
@@ -75,7 +75,8 @@ The script `main.py` is in charge of training the probe. The main arguments are 
 As a result of this script, a folder `runs/folder_run_name` will be generated. This folder contains three files:
 *  `ìnfo.log`: log file.
 *  `pytorch_model.bin`: the probing model serialized *i.e.*, the basis of the syntactic subspace, the vectors C and U.
-*  `metrics.log`: a serialized dictionary that contains the training losses, the validation losses, the precision, recall, and F1 score on the test set. You can use `python -m pickle runs/folder_run_name/metrics.log` to check it.
+*  `metrics.log`: a serialized dictionary that contains the training losses, the validation losses, the precision, recall, and F1 score on the test set. You can use `python -m pickle runs/folder_run_name/metrics.log` to check the metrics for the run.
+
 
 Here is an example of the usage of this script:
 ```sh
@@ -84,12 +85,13 @@ python src/main.py \
   --run_name codebert_python_5_128 \
   --pretrained_model_name_or_path microsoft/codebert-base \
   --model_type roberta \
-  --lang python \ 
+  --lang python \
   --layer 5 \
   --rank 128
 ```
 This command trains a 128-dimensional probe over the output embeddings of the 5th layer of CodeBERT using the Python dataset. After running this command, the folder `runs/codebert_python_5_128` is created.
 
+--- 
 ## Replicating the experiments of the paper
 To replicate the experiments included in the paper, we provide two scripts that run everything.
 - `run_experiments_rq123.py`: to replicate the results of RQ1, RQ2 and RQ3.
@@ -97,6 +99,25 @@ To replicate the experiments included in the paper, we provide two scripts that 
 
 You may have to change a few things in these two scripts such as the `CUDA_VISIBLE_DEVICE`, *i.e.*, GPU used with PyTorch. Besides, the script will generate all the results for all experiments in separated folders such as described in the previous section of this readme.
 
+After running the experiments (i.e., replicating the RQs), it is possible to get plots similar to the ones included in the paper using the `plot_graphs.py` script by specifying the base path of the run directories:
+`python plot_graphs.py --run_dir ./runs`.
+
+--- 
+## Hardware specifications
+In principle, all the experiments of this paper can be reproduced by following the instructions previously mentioned.
+For completeness, we also provide specifications the hardware and OS we used to get the results included in the paper.
+
+```sh
+OS: Gentoo Linux
+OS release: Gentoo Base System 2.8
+Kernel: Linux 5.15.41-gentoo-x86_64
+GPU: NVIDIA GeForce RTX 3090
+CUDA version: 11.3
+```
+Unfortunately, our probe cannot be run without at least one GPU. We also cannot ensure that the scripts can be used
+with GPUs other than those of NVIDIA.
+
+---
 ### You can cite our work if you find this repository or the paper useful.
 ```sh
 @misc{hernandez-ast-probe-2022,

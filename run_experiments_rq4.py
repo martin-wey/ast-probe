@@ -14,7 +14,7 @@ def main():
             for layer in layers:
                 for rank in [8, 16, 32, 64, 128, 256, 512]:
                     run_name = '_'.join([folder, lang, str(layer), str(rank), 'rq4'])
-                    os.system(f"CUDA_VISIBLE_DEVICES=3 python src/main.py --do_train --run_name {run_name} "
+                    os.system(f"CUDA_VISIBLE_DEVICES=0 python src/main.py --do_train --run_name {run_name} "
                               f"--pretrained_model_name_or_path {model} "
                               f"--model_type {model_type} --lang {lang} "
                               f"--layer {layer} --rank {rank}")
